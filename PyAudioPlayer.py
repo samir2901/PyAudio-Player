@@ -380,6 +380,10 @@ class Ui_MainWindow(object):
         self.url = QtCore.QUrl.fromLocalFile(filename)
         self.content = QtMultimedia.QMediaContent(self.url)
         self.player.setMedia(self.content)
+        currentAudio = filename
+        text = os.path.basename(currentAudio)
+        self.currentPlaying.setText(text)
+        self.player.play()
     
     def closeApp(self):
         #print("Exit is Pressed")
