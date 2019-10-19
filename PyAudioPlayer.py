@@ -400,7 +400,7 @@ class Ui_MainWindow(object):
             self.currentPlaying.setText(text)
             self.player.play()
             #print("Play Button is Pressed")   
-        except:
+        except:            
             print("No File Selected")     
 
     def pause(self):
