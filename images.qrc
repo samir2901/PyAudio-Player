@@ -1,0 +1,8 @@
+<RCC>
+  <qresource prefix="image">
+    <file>thunder_logo.png</file>
+  </qresource>
+  <qresource prefix="logo">
+    <file>multimedia-audio-player-icon.png</file>
+  </qresource>
+</RCC>
