@@ -371,19 +371,24 @@ class Ui_MainWindow(object):
 
 
     def getAudioFile(self):
+        global currentAudio
         global filename
         filter = "Audio Files (*.mp3)"
         f = QtWidgets.QFileDialog.getOpenFileName(None,"Open File",".",filter)
         filename = f[0]
         #print(filename)
-        #print("File is opened")
-        self.url = QtCore.QUrl.fromLocalFile(filename)
-        self.content = QtMultimedia.QMediaContent(self.url)
-        self.player.setMedia(self.content)
-        currentAudio = filename
-        text = os.path.basename(currentAudio)
-        self.currentPlaying.setText(text)
-        self.player.play()
+        #print("File is opened")        
+        try:
+            self.url = QtCore.QUrl.fromLocalFile(filename)
+            self.content = QtMultimedia.QMediaContent(self.url)
+            self.player.setMedia(self.content)
+            currentAudio = filename
+            currentText = os.path.basename(currentAudio)
+            self.currentPlaying.setText(currentText)
+            self.player.play()
+        except:
+            self.currentPlaying.setText(currentText)
+            
     
     def closeApp(self):
         #print("Exit is Pressed")
@@ -393,11 +398,12 @@ class Ui_MainWindow(object):
         #print(event)
         self.player.setVolume(event)
 
-    def play(self):
-        try:
+    def play(self):    
+        global currentText    
+        try:           
             currentAudio = filename
-            text = os.path.basename(currentAudio)
-            self.currentPlaying.setText(text)
+            currentText = os.path.basename(currentAudio)
+            self.currentPlaying.setText(currentText)
             self.player.play()
             #print("Play Button is Pressed")   
         except:            
