@@ -2,6 +2,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5 import QtMultimedia
 import sys
 import os
+import vlc
 
 
 class Ui_MainWindow(object):
@@ -329,16 +330,19 @@ class Ui_MainWindow(object):
         font.setPointSize(10)
         self.volumeLabel.setFont(font)
         self.volumeLabel.setObjectName("volumeLabel")
-
-
-
+        self.playVLC = QtWidgets.QPushButton(self.centralwidget)
+        self.playVLC.setGeometry(QtCore.QRect(30, 310, 161, 21))
+        self.playVLC.setObjectName("playVLC")
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(MainWindow)
         self.menubar.setGeometry(QtCore.QRect(0, 0, 482, 23))
         self.menubar.setObjectName("menubar")
         self.menuFile = QtWidgets.QMenu(self.menubar)
         self.menuFile.setObjectName("menuFile")
-        MainWindow.setMenuBar(self.menubar)        
+        MainWindow.setMenuBar(self.menubar)
+        self.statusbar = QtWidgets.QStatusBar(MainWindow)
+        self.statusbar.setObjectName("statusbar")
+        MainWindow.setStatusBar(self.statusbar)
         self.actionOpen_Media = QtWidgets.QAction(MainWindow)
         self.actionOpen_Media.setObjectName("actionOpen_Media")
         self.actionExit = QtWidgets.QAction(MainWindow)
@@ -352,6 +356,7 @@ class Ui_MainWindow(object):
 
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
+        self.playVLC.clicked.connect(self.vlcPlayer)
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
@@ -362,6 +367,7 @@ class Ui_MainWindow(object):
         self.currentPlaying.setText(_translate("MainWindow", "No File is Selected"))
         self.developLabel.setText(_translate("MainWindow", "Developed by thunder"))
         self.volumeLabel.setText(_translate("MainWindow", "Volume"))
+        self.playVLC.setText(_translate("MainWindow", "Play with VLC Media Player"))
         self.menuFile.setTitle(_translate("MainWindow", "File"))
         self.actionOpen_Media.setText(_translate("MainWindow", "Open Audio "))
         self.actionExit.setText(_translate("MainWindow", "Exit"))
@@ -376,6 +382,9 @@ class Ui_MainWindow(object):
         filter = "Audio Files (*.mp3)"
         f = QtWidgets.QFileDialog.getOpenFileName(None,"Open File",".",filter)
         filename = f[0]
+
+        self.filename = filename
+
         #print(filename)
         #print("File is opened")        
         try:
@@ -417,6 +426,10 @@ class Ui_MainWindow(object):
         self.currentPlaying.setText("Stopped!!")
         self.player.stop()
         #print("Stop is pressed")
+
+    def vlcPlayer(self):
+        player=vlc.MediaPlayer(self.filename)
+        player.play()
 
     
 import images_rc

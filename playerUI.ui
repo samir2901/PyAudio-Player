@@ -20,7 +20,8 @@
    <string>PyAudio Player</string>
   </property>
   <property name="windowIcon">
-   <iconset theme=":/logo/multimedia-audio-player-icon.png"/>
+   <iconset theme=":/logo/multimedia-audio-player-icon.png">
+    <normaloff>.</normaloff>.</iconset>
   </property>
   <property name="styleSheet">
    <string notr="true">* {
@@ -408,6 +409,19 @@ QMenu::separator {
     </property>
     <property name="text">
      <string>Volume</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="playVLC">
+    <property name="geometry">
+     <rect>
+      <x>30</x>
+      <y>310</y>
+      <width>161</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Play with VLC Media Player</string>
     </property>
    </widget>
   </widget>
